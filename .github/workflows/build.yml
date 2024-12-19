@@ -24,9 +24,9 @@ jobs:
           npm install
 
       - name: Log in to EAS
-        run: eas login --token ${{ secrets.EXPO_ACCESS_TOKEN }}
+        run: eas login
         env:
-          EXPO_ACCESS_TOKEN: ${{ secrets.EXPO_ACCESS_TOKEN }}  # Expoのアクセストークン
+          EXPO_ACCESS_TOKEN: ${{ secrets.EXPO_ACCESS_TOKEN }}  # Expoのアクセストークンを環境変数で指定
 
       - name: Build Android
         run: eas build --platform android --non-interactive

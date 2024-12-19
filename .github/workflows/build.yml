@@ -3,11 +3,11 @@ name: Expo Build
 on:
   push:
     branches:
-      - main
+      - main  # mainブランチにプッシュされたときにトリガー
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # macOSも選べますが、ここではUbuntuを選択
 
     steps:
       - name: Checkout code
@@ -16,17 +16,17 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '16'  # Node.jsのバージョン
 
       - name: Install dependencies
         run: |
           npm install -g eas-cli
           npm install
 
-      - name: Log in to EAS using token
-        run: eas login --token ${{ secrets.EXPO_ACCESS_TOKEN }}
+      - name: Log in to EAS
+        run: eas login
         env:
-          EXPO_ACCESS_TOKEN: ${{ secrets.EXPO_ACCESS_TOKEN }}
+          EXPO_ACCESS_TOKEN: ${{ secrets.EXPO_ACCESS_TOKEN }}  # Expoのアクセストークン
 
       - name: Build Android
         run: eas build --platform android --non-interactive
